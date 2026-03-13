@@ -11,16 +11,22 @@ app.use(express.urlencoded({extended:true}))
 
 app.get('/',(req,res)=>{
    fs.readdir(`./files`,function(err,files){
-     res.render('index',{files:files})
+     res.render('index',{files:files}) // first files:The varriable name you used in your ejs and the second files what value you want to pass
+   })
+})
+app.get('/file/:filename',(req,res)=>{
+   fs.readFile(`./files/${req.params.filename}`,"utf-8",function(err,filedata){
+      res.render('show',{filename:req.params.filename,filedata:filedata})
    })
 })
 app.post('/create',(req,res)=>{
-   fs.writeFile(`./files/${req.body.tittle.split(' ').join('').txt}`,req.body.details,function(err){
+   fs.writeFile(`./files/${req.body.tittle.split(' ').join('')}`,req.body.details,function(err){
     res.redirect("/")
    })
 })
 
-app.listen(3000,()=>{
-    console.log("Server listen on port : 3000");
+
+app.listen(3001,()=>{
+    console.log("Server listen on port : 3001");
     
 })

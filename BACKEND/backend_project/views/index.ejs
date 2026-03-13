@@ -10,17 +10,18 @@
     <div class ="main w-full min-h-screen bg-zinc-900">
         <div class="form  p-10 text-white">
             <form action="/create" method="post">
-                <input class="block  w-full rounded-lg outline-none px-5 py-2 bg-zinc-800"type="text" placeholder="Tittle goes here" name="tittle"/>
+               <input class="block  w-full rounded-lg outline-none px-5 py-2 bg-zinc-800"type="text" placeholder="Tittle goes here" name="tittle"/>
                 <textarea class="block w-full rounded-lg outline-none  mt-2 px-5 py-2 resize-none"placeholder="Write your task here" name="details"></textarea>
-                <input class="mt-2 bg-blue-600 px-5 py-2 rounded-md" type="submit" value="Create  Task">
+                <input class="mt-2 bg-blue-600 px-5 py-2 rounded-md" type="submit" value="Create Task">
             </form>
         </div>
         <div class="tasks flex gap-3 flex-wrap p-10">
-        <%if(files.length >0){%>
+        <%if(files.length>0){%>
           <%files.forEach(function(value){%>
             <div class="task w-72  px-3 py-4 bg-zinc-800">
-                <h1 class="text-white text-3xl tracking-tighter">Some task goes here</h1>
-                <a class="text-blue-500 inline-block mt-3"href="">Read more.</a>
+                <h1 class="text-white text-3xl tracking-tighter"><%=value%></h1>
+                <a class="text-blue-500 inline-block mt-3"href="/file/<%=value%>">Read more.</a>
+                <a class="text-zinc-600"href="/edit/<%=value%>">edit</a>
             </div>
             <%})%>
         <%}else{%>
