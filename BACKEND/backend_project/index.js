@@ -19,10 +19,22 @@ app.get('/file/:filename',(req,res)=>{
       res.render('show',{filename:req.params.filename,filedata:filedata})
    })
 })
+app.get('/edit/:filename',(req,res)=>{
+   fs.readFile(`./files/${req.params.filename}`,"utf-8",function(filedata){
+       res.render('edit',{previousFilename:req.params.filename})
+   })
+  
+})
 app.post('/create',(req,res)=>{
    fs.writeFile(`./files/${req.body.tittle.split(' ').join('')}`,req.body.details,function(err){
     res.redirect("/")
    })
+})
+
+app.post('/edit',(req,res)=>{
+  fs.rename(`./files/${req.body.previous}`,`./files/${req.body.new}`,function(error){
+   res.redirect('/')
+  })  
 })
 
 
